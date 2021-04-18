@@ -1,14 +1,19 @@
-import React, {Component} from "react";
+import React from "react";
 
-class App extends Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       count: 7,
+      name: "Counter App"
     };
   }
 
   render() {
+    console.log(this.state);
+    console.log(this.state.count);
+    console.log(this.state.name);
+    
     return (
       <div style={{textAlign: "center"}}>
 
