@@ -41,21 +41,33 @@ class App extends Component {
       <>
         <Container style={containerStyle}>
           <Row>
+            {/* Counter child component with props: Uncomment the codes below */}
+
+            <Col>
+              <Counter
+                name={this.state.name}
+                count={this.state.count}
+                increase={this.handleByShiftKey(1)}
+                decrease={this.handleByShiftKey(-1)}
+                reset={this.handleReset(0)}
+              />
+            </Col>
+
             {/* Use map to iterate over the array "counterApp" */}
-            {counterApp.map((counter, index) => {
-              return (
-                <Col key={index}>
-                  {/* Counter child component with props */}
-                  <Counter
-                    name={counter}
-                    count={this.state.count}
-                    increase={this.handleByShiftKey(1)}
-                    decrease={this.handleByShiftKey(-1)}
-                    reset={this.handleReset(0)}
-                  />
-                </Col>
-              )
-            })}
+            {/*{counterApp.map((counter, index) => {*/}
+            {/*  return (*/}
+            {/*    <Col key={index}>*/}
+            {/*      /!* Counter child component with props *!/*/}
+            {/*      <Counter*/}
+            {/*        name={counter}*/}
+            {/*        count={this.state.count}*/}
+            {/*        increase={this.handleByShiftKey(1)}*/}
+            {/*        decrease={this.handleByShiftKey(-1)}*/}
+            {/*        reset={this.handleReset(0)}*/}
+            {/*      />*/}
+            {/*    </Col>*/}
+            {/*  )*/}
+            {/*})}*/}
           </Row>
         </Container>
       </>
