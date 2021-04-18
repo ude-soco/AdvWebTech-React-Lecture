@@ -3,12 +3,53 @@ import {Button, Col, Container, Row} from "react-bootstrap";
 
 class Counter extends Component {
   constructor(props) {
-    // Without super(prop), this.props will throw an error
     super(props);
-    this.state = {};
+
+    // Lifecycle: Constructor initialized
+    console.log("Constructor initialized");
+
+    this.state = {
+      count: 7,
+      name: "Counter App",
+    };
+  }
+
+  // Lifecycle: Component did mount
+  componentDidMount() {
+    console.log("Component mounted!");
+  }
+
+  // Lifecycle: Component did update
+  componentDidUpdate = () => {
+    console.log("Component updated!");
+  };
+
+  // Lifecycle: Component will unmount
+  componentWillUnmount() {
+    console.log("Component is unmounted from the DOM!");
+  }
+
+  handleReset = (value) => () => {
+    this.setState({
+      count: value,
+    });
+  }
+
+  handleByShiftKey = (number) => (e) => {
+    if (e.shiftKey) {
+      this.setState({
+        count: this.state.count + number * 10,
+      });
+    } else {
+      this.setState({
+        count: this.state.count + number,
+      });
+    }
   }
 
   render() {
+    // Lifecycle: Render method initialized
+    console.log("Render method initialized");
 
     // Styling
     let textStyle = {
@@ -31,45 +72,31 @@ class Counter extends Component {
     let gutter = {margin: "0px 4px 0px 4px"}
 
     return (
-      <div>
+      <>
         <Container style={counterStyle}>
           <Row className="justify-content-md-center">
             <Col>
-              <h3>{this.props.name}</h3>
+              <h3>{this.state.name}</h3>
             </Col>
           </Row>
           <Row style={textStyle} className="justify-content-md-center">
-            <Col>{this.props.count}</Col>
+            <Col>{this.state.count}</Col>
           </Row>
           <Container>
             <Row className="align-item-md-center">
-              <Button
-                variant="primary"
-                className="btn-primary"
-                onClick={this.props.increase}
-              >
+              <Button className="btn-primary" onClick={this.handleByShiftKey(1)}>
                 Increase
               </Button>
-              <Button
-                variant="primary"
-                className="btn-danger"
-                style={gutter}
-                onClick={this.props.decrease}
-              >
+              <Button className="btn-danger" style={gutter} onClick={this.handleByShiftKey(-1)}>
                 Decrease
               </Button>
-              <Button
-                variant="primary"
-                className="btn-light"
-                onClick={this.props.reset}
-              >
+              <Button className="btn-light" onClick={this.handleReset(0)}>
                 Reset
               </Button>
             </Row>
           </Container>
         </Container>
-
-      </div>
+      </>
     );
   }
 }

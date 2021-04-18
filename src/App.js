@@ -1,74 +1,43 @@
 import React, {Component} from "react";
-import {Col, Container, Row} from "react-bootstrap";
+import {Button, Col, Container, Row} from "react-bootstrap";
 import Counter from "./components/Counter";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      count: 7,
-      name: "Counter App",
+      unmount: false
     };
   }
 
-  handleReset = (value) => () => {
+  handleUnmount = () => {
     this.setState({
-      count: value,
-    });
+      unmount: !this.state.unmount
+    })
   }
-
-  handleByShiftKey = (number) => (e) => {
-    if (e.shiftKey) {
-      this.setState({
-        count: this.state.count + number * 10,
-      });
-    } else {
-      this.setState({
-        count: this.state.count + number,
-      });
-    }
-  }
-
 
   render() {
     // Styling
     let containerStyle = {marginTop: 150};
-
-    // An array of counter app names
-    let counterApp = ["Counter App 1", "Counter App 2", "Counter App 3"]
-
+    let unmountStyle = {margin: 32};
     return (
       <>
         <Container style={containerStyle}>
-          <Row>
-            {/* Counter child component with props: Uncomment the codes below */}
-
-            <Col>
-              <Counter
-                name={this.state.name}
-                count={this.state.count}
-                increase={this.handleByShiftKey(1)}
-                decrease={this.handleByShiftKey(-1)}
-                reset={this.handleReset(0)}
-              />
-            </Col>
-
-            {/* Use map to iterate over the array "counterApp" */}
-            {/*{counterApp.map((counter, index) => {*/}
-            {/*  return (*/}
-            {/*    <Col key={index}>*/}
-            {/*      /!* Counter child component with props *!/*/}
-            {/*      <Counter*/}
-            {/*        name={counter}*/}
-            {/*        count={this.state.count}*/}
-            {/*        increase={this.handleByShiftKey(1)}*/}
-            {/*        decrease={this.handleByShiftKey(-1)}*/}
-            {/*        reset={this.handleReset(0)}*/}
-            {/*      />*/}
-            {/*    </Col>*/}
-            {/*  )*/}
-            {/*})}*/}
+          <Row style={unmountStyle} className="justify-content-md-center">
+            <Button
+              className="btn-info"
+              onClick={this.handleUnmount}
+            >
+              {this.state.unmount ? "Remount" : "Unmount"}
+            </Button>
           </Row>
+          {this.state.unmount ? <></> : (
+            <Row>
+              <Col>
+                <Counter/>
+              </Col>
+            </Row>
+          )}
         </Container>
       </>
     );
