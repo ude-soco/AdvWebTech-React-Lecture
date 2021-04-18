@@ -53,6 +53,7 @@ class App extends Component {
   }
 
   handleByShiftKey = (number) => (e) => {
+    console.log(e)
     if (e.shiftKey) {
       this.setState({
         count: this.state.count + number * 10,
