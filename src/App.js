@@ -1,75 +1,41 @@
 import React, {Component} from "react";
-import {Col, Container, Row} from "react-bootstrap";
+import {Container, Row} from "react-bootstrap";
 import Counter from "./components/Counter";
+import NavigationBar from "./components/NavigationBar";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      count: 7,
-      name: "Counter App",
-    };
+    this.state = {};
   }
-
-  handleReset = (value) => () => {
-    this.setState({
-      count: value,
-    });
-  }
-
-  handleByShiftKey = (number) => (e) => {
-    if (e.shiftKey) {
-      this.setState({
-        count: this.state.count + number * 10,
-      });
-    } else {
-      this.setState({
-        count: this.state.count + number,
-      });
-    }
-  }
-
 
   render() {
     // Styling
     let containerStyle = {marginTop: 150};
-
-    // An array of counter app names
-    let counterApp = ["Counter App 1", "Counter App 2", "Counter App 3"]
-
     return (
       <>
-        <Container style={containerStyle}>
-          <Row>
-            {/* Counter child component with props: Uncomment the codes below */}
+        <Router>
+          <NavigationBar/>
+          <Switch>
+            <Container style={containerStyle}>
+              <Row>
+                <Route path="/" exact>
+                  <Counter color={"#5bc0de"}/>
+                </Route>
 
-            <Col>
-              <Counter
-                name={this.state.name}
-                count={this.state.count}
-                increase={this.handleByShiftKey(1)}
-                decrease={this.handleByShiftKey(-1)}
-                reset={this.handleReset(0)}
-              />
-            </Col>
+                <Route path="/second">
+                  <Counter color={"#0275d8"}/>
+                </Route>
 
-            {/* Use map to iterate over the array "counterApp" */}
-            {/*{counterApp.map((counter, index) => {*/}
-            {/*  return (*/}
-            {/*    <Col key={index}>*/}
-            {/*      /!* Counter child component with props *!/*/}
-            {/*      <Counter*/}
-            {/*        name={counter}*/}
-            {/*        count={this.state.count}*/}
-            {/*        increase={this.handleByShiftKey(1)}*/}
-            {/*        decrease={this.handleByShiftKey(-1)}*/}
-            {/*        reset={this.handleReset(0)}*/}
-            {/*      />*/}
-            {/*    </Col>*/}
-            {/*  )*/}
-            {/*})}*/}
-          </Row>
-        </Container>
+                <Route path="/third">
+                  <Counter color={"#5cb85c"}/>
+                </Route>
+              </Row>
+            </Container>
+          </Switch>
+        </Router>
       </>
     );
   }
