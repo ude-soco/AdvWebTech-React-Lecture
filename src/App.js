@@ -32,7 +32,7 @@ class App extends Component {
     // this.state.count = 9
 
     // Access the states
-    console.log(this.state.count);
+    console.log("Current value of count: " + this.state.count);
     
     // Styling
     let containerStyle = {
