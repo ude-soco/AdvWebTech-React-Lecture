@@ -19,9 +19,6 @@ class App extends Component {
             <Col>
               <Counter/>
             </Col>
-            <Col>
-              <Counter/>
-            </Col>
           </Row>
         </Container>
       </>

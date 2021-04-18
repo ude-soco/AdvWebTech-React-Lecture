@@ -29,6 +29,7 @@ class Counter extends Component {
   }
 
   handleChangeName = (e) => {
+    console.log(e)
     this.setState({
       name: e.target.value,
     });
