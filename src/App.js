@@ -4,7 +4,6 @@ import Counter from "./components/Counter";
 import NavigationBar from "./components/NavigationBar";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -18,23 +17,15 @@ class App extends Component {
       <>
         <Router>
           <NavigationBar/>
-          <Switch>
-            <Container style={containerStyle}>
-              <Row>
-                <Route path="/" exact>
-                  <Counter color={"#5bc0de"}/>
-                </Route>
-
-                <Route path="/second">
-                  <Counter color={"#0275d8"}/>
-                </Route>
-
-                <Route path="/third">
-                  <Counter color={"#5cb85c"}/>
-                </Route>
-              </Row>
-            </Container>
-          </Switch>
+          <Container style={containerStyle}>
+            <Row>
+              <Switch>
+                <Route path="/" exact component={() => (<Counter pageName={"First counter"} color={"#5bc0de"}/>)}/>
+                <Route path="/second" component={() => (<Counter pageName={"Second counter"} color={"#0275d8"}/>)}/>
+                <Route path="/third" component={() => (<Counter pageName={"Third counter"} color={"#5cb85c"}/>)}/>
+              </Switch>
+            </Row>
+          </Container>
         </Router>
       </>
     );

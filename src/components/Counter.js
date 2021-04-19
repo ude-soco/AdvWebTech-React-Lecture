@@ -48,9 +48,17 @@ class Counter extends Component {
       textAlign: "center",
     };
     let gutter = {margin: "0px 4px 0px 4px"}
+    let center = {textAlign: "center"}
 
     return (
       <>
+      <Container >
+        <Row className="justify-content-md-center" style={center}>
+          <Col>
+            <h1>{this.props.pageName}</h1>
+          </Col>
+        </Row>
+      </Container>
         <Container style={counterStyle}>
           <Row className="justify-content-md-center">
             <Col>
