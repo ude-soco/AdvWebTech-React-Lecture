@@ -3,7 +3,7 @@ export const INCREMENT = 'increaseCount';
 export const DECREMENT = 'decreaseCount';
 export const RESET = 'resetCount';
 
-// Action creators
+// Action methods
 export const increase = () => ({
   type: INCREMENT,
 });
@@ -16,12 +16,13 @@ export const reset = () => ({
   type: RESET,
 });
 
+// Initial store state
 const initialState = {
   count: 9
 }
 
-
-export default function counterReducer (state = initialState, action) {
+// Reducer function
+export default function counterReducer(state = initialState, action) {
   switch (action.type) {
     case INCREMENT:
       return {

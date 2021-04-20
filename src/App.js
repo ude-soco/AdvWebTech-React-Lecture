@@ -1,9 +1,8 @@
 import React, {Component} from "react";
 import {Button, Col, Container, Row} from "react-bootstrap";
 import Counter from "./components/Counter";
-import {Provider} from 'react-redux';
-import {store} from './redux/configureStore'
-
+import {Provider} from "react-redux";
+import {store} from "./redux/configureStore";
 
 class App extends Component {
   constructor(props) {
@@ -13,9 +12,9 @@ class App extends Component {
 
   handleUnmount = () => {
     this.setState({
-      unmount: !this.state.unmount
-    })
-  }
+      unmount: !this.state.unmount,
+    });
+  };
 
   render() {
     // Styling
@@ -26,14 +25,13 @@ class App extends Component {
       <Provider store={store}>
         <Container style={containerStyle}>
           <Row style={unmountStyle} className="justify-content-md-center">
-            <Button
-              className="btn-info"
-              onClick={this.handleUnmount}
-            >
+            <Button className="btn-info" onClick={this.handleUnmount}>
               {this.state.unmount ? "Remount" : "Unmount"}
             </Button>
           </Row>
-          {this.state.unmount ? <></> : (
+          {this.state.unmount ? (
+            <></>
+          ) : (
             <Row>
               <Col>
                 <Counter/>
