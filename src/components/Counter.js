@@ -1,34 +1,18 @@
 import React, {Component} from 'react';
 import {Button, Col, Container, Row} from "react-bootstrap";
+import {increase, decrease, reset} from "../redux/reducers/counterReducer";
+import {connect} from 'react-redux';
 
 class Counter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      count: 7,
       name: "Counter App",
     };
   }
 
-  handleReset = (value) => () => {
-    this.setState({
-      count: value,
-    });
-  }
-
-  handleByShiftKey = (number) => (e) => {
-    if (e.shiftKey) {
-      this.setState({
-        count: this.state.count + number * 10,
-      });
-    } else {
-      this.setState({
-        count: this.state.count + number,
-      });
-    }
-  }
-
   render() {
+
     // Styling
     let textStyle = {
       fontSize: 104,
@@ -48,17 +32,9 @@ class Counter extends Component {
       textAlign: "center",
     };
     let gutter = {margin: "0px 4px 0px 4px"}
-    let center = {textAlign: "center"}
 
     return (
       <>
-      <Container >
-        <Row className="justify-content-md-center" style={center}>
-          <Col>
-            <h1>{this.props.pageName}</h1>
-          </Col>
-        </Row>
-      </Container>
         <Container style={counterStyle}>
           <Row className="justify-content-md-center">
             <Col>
@@ -66,26 +42,26 @@ class Counter extends Component {
             </Col>
           </Row>
           <Row style={textStyle} className="justify-content-md-center">
-            <Col>{this.state.count}</Col>
+            <Col>{this.props.count}</Col>
           </Row>
           <Container>
             <Row className="align-item-md-center">
               <Button
                 className="btn-primary"
-                onClick={this.handleByShiftKey(1)}
+                onClick={this.props.increase}
               >
                 Increase
               </Button>
               <Button
                 className="btn-danger"
                 style={gutter}
-                onClick={this.handleByShiftKey(-1)}
+                onClick={this.props.decrease}
               >
                 Decrease
               </Button>
               <Button
                 className="btn-light"
-                onClick={this.handleReset(0)}
+                onClick={this.props.reset}
               >
                 Reset
               </Button>
@@ -97,4 +73,18 @@ class Counter extends Component {
   }
 }
 
-export default Counter;
+const mapStateToProps = state => {
+  return {
+    count: state.counter.count
+  }
+}
+
+const mapDispatchToProps = () => {
+  return {
+    increase,
+    decrease,
+    reset
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps())(Counter);

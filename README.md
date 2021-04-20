@@ -1,1 +1,1 @@
-# AdvWebTech-React-Lecture: React router
+# AdvWebTech-React-Lecture: Redux

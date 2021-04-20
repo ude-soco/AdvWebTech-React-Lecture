@@ -1,33 +1,47 @@
 import React, {Component} from "react";
-import {Container, Row} from "react-bootstrap";
+import {Button, Col, Container, Row} from "react-bootstrap";
 import Counter from "./components/Counter";
-import NavigationBar from "./components/NavigationBar";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {Provider} from 'react-redux';
+import {store} from './redux/configureStore'
+
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {unmount: false};
+  }
+
+  handleUnmount = () => {
+    this.setState({
+      unmount: !this.state.unmount
+    })
   }
 
   render() {
     // Styling
     let containerStyle = {marginTop: 150};
+    let unmountStyle = {margin: 32};
+
     return (
-      <>
-        <Router>
-          <NavigationBar/>
-          <Container style={containerStyle}>
+      <Provider store={store}>
+        <Container style={containerStyle}>
+          <Row style={unmountStyle} className="justify-content-md-center">
+            <Button
+              className="btn-info"
+              onClick={this.handleUnmount}
+            >
+              {this.state.unmount ? "Remount" : "Unmount"}
+            </Button>
+          </Row>
+          {this.state.unmount ? <></> : (
             <Row>
-              <Switch>
-                <Route path="/" exact component={() => (<Counter pageName={"First counter"} color={"#5bc0de"}/>)}/>
-                <Route path="/second" component={() => (<Counter pageName={"Second counter"} color={"#0275d8"}/>)}/>
-                <Route path="/third" component={() => (<Counter pageName={"Third counter"} color={"#5cb85c"}/>)}/>
-              </Switch>
+              <Col>
+                <Counter/>
+              </Col>
             </Row>
-          </Container>
-        </Router>
-      </>
+          )}
+        </Container>
+      </Provider>
     );
   }
 }
