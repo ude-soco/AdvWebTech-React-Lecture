@@ -1,1 +1,1 @@
-# AdvWebTech-React-Lecture
+# AdvWebTech-React-Lecture: Component lifecycle
